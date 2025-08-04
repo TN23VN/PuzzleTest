@@ -54,9 +54,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FillAmount: 0
+    - _FillAmount: 0.5
+    - _Float: 0.6
+    - _SARM: 0.58
     m_Colors:
-    - _Color01: {r: 0.82641506, g: 0.123182535, b: 0.123182535, a: 1}
+    - _Color01: {r: 0.12156863, g: 0.827451, b: 0.50002694, a: 1}
+    - _Color02: {r: 1, g: 0, b: 0, a: 1}
+    - _Color03: {r: 0, g: 0.054842927, b: 1, a: 1}
+    - _Color04: {r: 1, g: 0, b: 0.9079189, a: 1}
     - _FillAmount: {r: -1.35, g: -0.26, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
