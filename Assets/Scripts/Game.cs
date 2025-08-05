@@ -35,6 +35,17 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void SwitchCube(Bottle bottle1, Bottle bottle2)
+    {
+        List<Cube> bottle1Cubes = bottle1.cubes;
+        List<Cube> bottle2Cubes = bottle2.cubes;
+
+        Cube c = bottle1Cubes[0];
+        bottle1Cubes.RemoveAt(0);
+
+        bottle2Cubes.Add(c);
+    }    
+
     public class Bottle
     {
         public List<Cube> cubes = new List<Cube>();
