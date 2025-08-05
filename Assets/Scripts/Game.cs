@@ -15,22 +15,32 @@ public class Game : MonoBehaviour
 
         bottles.Add(new Bottle
         {
-            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.BLUE } }
+            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.RED }, new Cube { type = CubeType.RED } }
         });
 
         bottles.Add(new Bottle
         {
-            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.BLUE } }
+            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.RED } }
+        });
+
+        bottles.Add(new Bottle
+        {
+            cubes = new List<Cube> { new Cube { type = CubeType.RED }, new Cube { type = CubeType.BLUE } }
+        });
+
+        bottles.Add(new Bottle
+        {
+            cubes = new List<Cube> { }
         });
 
         graphic.RefreshBottleGraphic(bottles);
         yield return new WaitForSeconds(2f);
 
-        //PrintBottles();
-
+        /*/
+        PrintBottles();
         SwitchCube(bottles[0],bottles[1]);
         graphic.RefreshBottleGraphic(bottles);
-        
+        /*/
     }
 
     public void PrintBottles()
@@ -74,6 +84,11 @@ public class Game : MonoBehaviour
             {
                 bottle1Cubes.RemoveAt(i);
                 bottle2Cubes.Add(cube);
+
+                if(bottle2Cubes.Count == 4)
+                {
+                    break;
+                }
             }
             else {break;}
         }

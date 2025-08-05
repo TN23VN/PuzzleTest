@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class BottleGraphic : MonoBehaviour
 {
+    public GameGraphic gameGraphic;
+
     public int index;
     public CubeGraphic[] cubeGraphics;
 
     private void OnMouseUpAsButton()
     {
-        Debug.Log("Click bottle Index: " + index);
+        gameGraphic.OnClickBottle(index);
     }
     public void SetGraphic(Game.CubeType[] cubeType)
     {
