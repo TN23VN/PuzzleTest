@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -5,18 +6,31 @@ using UnityEngine.Pool;
 
 public class Game : MonoBehaviour
 {
+    public GameGraphic graphic;
     public List<Bottle> bottles;
 
-    private void Start()
+    private IEnumerator Start()
     {
         bottles = new List<Bottle>();
 
         bottles.Add(new Bottle
         {
-            cubes = new List<Cube> { new Cube { type = CubeType.BLUE } }
+            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.BLUE } }
         });
 
-        PrintBottles();
+        bottles.Add(new Bottle
+        {
+            cubes = new List<Cube> { new Cube { type = CubeType.BLUE }, new Cube { type = CubeType.BLUE } }
+        });
+
+        graphic.RefreshBottleGraphic(bottles);
+        yield return new WaitForSeconds(2f);
+
+        //PrintBottles();
+
+        SwitchCube(bottles[0],bottles[1]);
+        graphic.RefreshBottleGraphic(bottles);
+        
     }
 
     public void PrintBottles()
@@ -66,6 +80,16 @@ public class Game : MonoBehaviour
         
     }
 
+    public void SwitchCube(int bottleIndex1, int bottleIndex2)
+    {
+        Bottle b1 = bottles[bottleIndex1];
+        Bottle b2 = bottles[bottleIndex2];
+
+        SwitchCube(b1,b2);
+
+        graphic.RefreshBottleGraphic(bottles);
+
+    }
     public bool CheckWinCondition()
     {
         bool winFlag = true;
