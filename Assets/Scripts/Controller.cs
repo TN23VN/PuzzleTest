@@ -46,6 +46,7 @@ public class Controller : MonoBehaviour
 
             transform.eulerAngles = new Vector3(0,0,angelValue);
             bottleMaskSR.material.SetFloat("_SARM", ScaleAndRotationMultiplierCurve.Evaluate(angelValue));
+            bottleMaskSR.material.SetFloat("_FillAmount", FillAmountCurve.Evaluate(angelValue));
 
             t += Time.deltaTime;
 
@@ -55,5 +56,6 @@ public class Controller : MonoBehaviour
         angelValue = 90.0f;
         transform.eulerAngles = new Vector3(0, 0, angelValue);
         bottleMaskSR.material.SetFloat("_SARM", ScaleAndRotationMultiplierCurve.Evaluate(angelValue));
+        bottleMaskSR.material.SetFloat("_FillAmount", FillAmountCurve.Evaluate(angelValue));
     }
 }
