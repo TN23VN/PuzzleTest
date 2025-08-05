@@ -105,6 +105,65 @@ public class Game : MonoBehaviour
         graphic.RefreshBottleGraphic(bottles);
 
     }
+
+    public List<SwitchCubeCommand> CheckSwitchCube(int bottleIndex1, int bottleIndex2)
+    {
+        List<SwitchCubeCommand > commands = new List<SwitchCubeCommand>();
+        
+        Bottle bottle1 = bottles[bottleIndex1];
+        Bottle bottle2 = bottles[bottleIndex2];
+
+        List<Cube> bottle1Cubes = bottle1.cubes;
+        List<Cube> bottle2Cubes = bottle2.cubes;
+
+        if (bottle1Cubes.Count == 0) { return commands; }
+        if (bottle2Cubes.Count == 4) { return commands; }
+
+        int index = bottle1Cubes.Count - 1;
+        Cube c = bottle1Cubes[index];
+
+        var type = c.type;
+        if (bottle2Cubes.Count > 0 && bottle2Cubes[bottle2Cubes.Count - 1].type != type)
+        {
+            return commands;
+        }
+
+        int targetIndex = bottle2Cubes.Count;
+
+        for (int i = index; i >= 0; i--)
+        {
+            Cube cube = bottle1Cubes[i];
+            if (cube.type == type)
+            {
+                int fromCubeIndex = i;
+                int toCubeIndex = targetIndex;
+                int fromBottleIndex = bottleIndex1;
+                int toBottleIndex = bottleIndex2;
+
+                commands.Add(new SwitchCubeCommand
+                {
+                    type = type,
+                    fromCubeIndex = fromCubeIndex,
+                    toCubeIndex = toCubeIndex,
+                    fromBottleIndex = fromBottleIndex,
+                    toBottleIndex = toBottleIndex
+                });
+                /*/
+                bottle1Cubes.RemoveAt(i);
+                bottle2Cubes.Add(cube);
+                /*/
+
+                targetIndex++;
+                if (targetIndex == 4)
+                {
+                    break;
+                }
+            }
+            else { break; }
+        }
+
+        return commands;
+    }
     public bool CheckWinCondition()
     {
         bool winFlag = true;
@@ -133,6 +192,16 @@ public class Game : MonoBehaviour
             }
         }
         return winFlag;
+    }
+
+    public class SwitchCubeCommand
+    {
+        public CubeType type;
+        public int fromBottleIndex;
+        public int fromCubeIndex;
+
+        public int toBottleIndex;
+        public int toCubeIndex;
     }
 
     public class Bottle

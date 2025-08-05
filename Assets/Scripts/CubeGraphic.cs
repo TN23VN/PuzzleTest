@@ -36,4 +36,18 @@ public class CubeGraphic : MonoBehaviour
 
         }
     }
+
+    public static CubeGraphicType ConvertFromGameType(Game.CubeType cubeType)
+    {
+        switch (cubeType)
+        {
+            case Game.CubeType.BLUE:
+                return CubeGraphicType.BLUE;
+            case Game.CubeType.GREEN:
+                return CubeGraphicType.GREEN;
+            case Game.CubeType.RED:
+                return CubeGraphicType.RED;
+        }
+        return CubeGraphicType.NONE;
+    }
 }

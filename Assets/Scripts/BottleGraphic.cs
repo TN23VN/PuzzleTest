@@ -6,6 +6,7 @@ public class BottleGraphic : MonoBehaviour
 
     public int index;
     public CubeGraphic[] cubeGraphics;
+    public Transform bottleUpTransform;
 
     private void OnMouseUpAsButton()
     {
@@ -17,26 +18,45 @@ public class BottleGraphic : MonoBehaviour
         {
             if (i >= cubeType.Length)
             {
-                cubeGraphics[i].SetColor(CubeGraphicType.NONE);
+                SetGraphicNone(i);
             }
             else
             {
-                CubeGraphicType type = CubeGraphicType.BLUE;
-
-                switch (cubeType[i])
-                {
-                    case Game.CubeType.BLUE:
-                        type = CubeGraphicType.BLUE;
-                        break;
-                    case Game.CubeType.GREEN:
-                        type = CubeGraphicType.GREEN;
-                        break;
-                    case Game.CubeType.RED:
-                        type = CubeGraphicType.RED;
-                        break;
-                }
-                cubeGraphics[i].SetColor(type);
+                SetGraphic(i, cubeType[i]);
             }
         }
+    }
+
+    public void SetGraphic(int index, Game.CubeType type)
+    {
+        CubeGraphicType colorType = CubeGraphicType.BLUE;
+        switch (type)
+        {
+            case Game.CubeType.BLUE:
+                colorType = CubeGraphicType.BLUE;
+                break;
+            case Game.CubeType.GREEN:
+                colorType = CubeGraphicType.GREEN;
+                break;
+            case Game.CubeType.RED:
+                colorType = CubeGraphicType.RED;
+                break;
+        }
+        cubeGraphics[index].SetColor(colorType);
+    }
+
+    public void SetGraphicNone(int index)
+    {
+        cubeGraphics[index].SetColor(CubeGraphicType.NONE);
+    }
+
+    public Vector3 GetCubePosition(int index)
+    {
+        return cubeGraphics[index].transform.position;
+    }
+
+    public Vector3 GetBottleUpPosition()
+    {
+        return bottleUpTransform.position;
     }
 }
